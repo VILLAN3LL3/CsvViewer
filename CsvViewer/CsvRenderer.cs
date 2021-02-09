@@ -59,20 +59,10 @@ namespace CsvViewer
 
             foreach (CsvColumn column in csvTable.Columns)
             {
-                emptyLineBuilder.Append(GetPlaceholder(column.Width));
+                emptyLineBuilder.Append(new string('-', column.Width));
                 emptyLineBuilder.Append('+');
             }
             return emptyLineBuilder.ToString();
-        }
-
-        private static string GetPlaceholder(int length)
-        {
-            var stringBuilder = new StringBuilder();
-            for (int i = 0; i < length; i++)
-            {
-                stringBuilder.Append('-');
-            }
-            return stringBuilder.ToString();
         }
     }
 }

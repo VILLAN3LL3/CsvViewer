@@ -10,7 +10,7 @@ namespace CsvViewer
             string path = Console.ReadLine();
 
             var interactor = new CsvInteractor();
-            foreach (string line in interactor.Interact(path))
+            foreach (string line in interactor.GetRenderedCsvTableByPath(path))
             {
                 Console.WriteLine(line);
             }

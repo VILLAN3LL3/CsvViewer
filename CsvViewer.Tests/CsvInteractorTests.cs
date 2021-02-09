@@ -10,14 +10,14 @@ namespace CsvViewer.Tests
         private CsvInteractor CreateCsvInteractor() => new CsvInteractor();
 
         [Test]
-        public void Interact_StateUnderTest_ExpectedBehavior()
+        public void Should_Integrate_Correctly()
         {
             // Arrange
             CsvInteractor csvInteractor = CreateCsvInteractor();
             string path = "addresses.csv";
 
             // Act
-            IList<string> result = csvInteractor.Interact(
+            IList<string> result = csvInteractor.GetRenderedCsvTableByPath(
                 path);
 
             // Assert
