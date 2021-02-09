@@ -6,7 +6,19 @@ namespace CsvViewer
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var reader = new CsvReader();
+            Console.WriteLine("Geben Sie den Pfad zu einem CSV File an");
+            var path = Console.ReadLine();
+            var lines = reader.ReadCsv(path);
+            foreach (var line in lines)
+            {
+                foreach (var column in line)
+                {
+                    Console.Write(column + " - ");
+                }
+                Console.WriteLine();
+            }
+            Console.Read();
         }
     }
 }
