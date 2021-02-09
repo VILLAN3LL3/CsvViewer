@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace CsvViewer.Tests
@@ -20,7 +21,7 @@ namespace CsvViewer.Tests
                 csvTable);
 
             // Assert
-            Assert.Fail();
+            result.Should().BeEquivalentTo(TestData.RenderedCsvData);
         }
     }
 }
