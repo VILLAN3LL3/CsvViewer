@@ -15,10 +15,11 @@ namespace CsvViewer
             var lineValues = new List<string[]>();
 
             using var streamReader = new StreamReader(File.OpenRead(path));
+
             while (!streamReader.EndOfStream)
             {
-                var line = streamReader.ReadLine();
-                var values = line.Split(';');
+                string line = streamReader.ReadLine();
+                string[] values = line.Split(';');
                 if (values.Length > 0)
                 {
                     lineValues.Add(values);
