@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 
 namespace CsvViewer.Tests
@@ -17,7 +16,7 @@ namespace CsvViewer.Tests
             string path = "addresses.csv";
 
             // Act
-            IList<string[]> result = csvReader.ReadCsv(
+            string[] result = csvReader.ReadCsv(
                 path);
 
             // Assert

@@ -21,7 +21,7 @@ namespace CsvViewer.Tests
                 csvTable);
 
             // Assert
-            result.Should().BeEquivalentTo(TestData.RenderedCsvData);
+            result.Should().Equal(TestData.RenderedCsvData);
         }
     }
 }
