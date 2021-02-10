@@ -6,16 +6,35 @@ namespace CsvViewer
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Geben Sie den Pfad zu einem CSV File an");
-            string path = Console.ReadLine();
+            string path = GetFilePathFromArgsOrCommandLine(args);
 
-            var interactor = new CsvInteractor();
-            foreach (string line in interactor.GetRenderedCsvTableByPath(path))
+            try
             {
-                Console.WriteLine(line);
-            }
+                var interactor = new CsvInteractor();
+                foreach (string line in interactor.GetRenderedCsvTableByPath(path))
+                {
+                    Console.WriteLine(line);
+                }
 
-            Console.ReadLine();
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occured: {ex.Message}");
+            }
+        }
+
+        private static string GetFilePathFromArgsOrCommandLine(string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Please enter the path to the csv file you want to display");
+                return Console.ReadLine();
+            }
+            else
+            {
+                return args[0];
+            }
         }
     }
 }

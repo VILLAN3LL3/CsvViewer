@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CsvViewer": {
+      "commandName": "Project",
+      "commandLineArgs": "addresses.csv"
+    }
+  }
+}
