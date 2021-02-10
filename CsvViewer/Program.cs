@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CsvViewer
 {
@@ -10,13 +11,36 @@ namespace CsvViewer
 
             try
             {
-                var interactor = new CsvInteractor();
-                foreach (string line in interactor.GetRenderedCsvTableByPath(path))
+                var interactor = new CsvInteractor(path);
+
+                var commands = new Dictionary<ConsoleKey, Func<IList<string>>>()
+                {
+                    { ConsoleKey.N, () => interactor.GoToNextPage() },
+                    { ConsoleKey.P, () => interactor.GoToPreviousPage() },
+                    { ConsoleKey.L, () => interactor.GoToLastPage() },
+                    { ConsoleKey.X, () => interactor.Exit() }
+                };
+
+                foreach (string line in interactor.GotToFirstPage())
                 {
                     Console.WriteLine(line);
                 }
 
-                Console.ReadLine();
+                while (true)
+                {
+                    Console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
+                    ConsoleKey consoleKey = Console.ReadKey().Key;
+
+                    if (!commands.TryGetValue(consoleKey, out Func<IList<string>> command))
+                    {
+                        throw new NotSupportedException($"Key {consoleKey} is not supported");
+                    }
+
+                    foreach (string line in command.Invoke())
+                    {
+                        Console.WriteLine(line);
+                    }
+                }
             }
             catch (Exception ex)
             {

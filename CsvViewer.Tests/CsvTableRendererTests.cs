@@ -5,15 +5,15 @@ using NUnit.Framework;
 namespace CsvViewer.Tests
 {
     [TestFixture]
-    public class CsvRendererTests
+    public class CsvTableRendererTests
     {
-        private CsvRenderer CreateCsvRenderer() => new CsvRenderer();
+        private CsvTableRenderer CreateCsvRenderer() => new CsvTableRenderer();
 
         [Test]
         public void Should_Render_Csv_Correctly()
         {
             // Arrange
-            CsvRenderer csvRenderer = CreateCsvRenderer();
+            CsvTableRenderer csvRenderer = CreateCsvRenderer();
             CsvTable csvTable = TestData.CsvTable;
 
             // Act
