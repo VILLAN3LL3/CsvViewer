@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CsvViewer.Model;
 
 namespace CsvViewer
 {
@@ -7,11 +8,12 @@ namespace CsvViewer
     {
         private static void Main(string[] args)
         {
-            string path = GetFilePathFromArgsOrCommandLine(args);
+            CommandLineArg arguments = GetCommandLineArgs(args);
+            Console.WriteLine($"I will now display the first page of the csv table on path {arguments.Path} with a maximum page size of {arguments.PageSize}:");
 
             try
             {
-                var interactor = new CsvInteractor(path);
+                var interactor = new CsvInteractor(arguments);
 
                 var commands = new Dictionary<ConsoleKey, Func<IList<string>>>()
                 {
@@ -48,7 +50,16 @@ namespace CsvViewer
             }
         }
 
-        private static string GetFilePathFromArgsOrCommandLine(string[] args)
+        private static CommandLineArg GetCommandLineArgs(string[] args)
+        {
+            return new CommandLineArg
+            {
+                Path = GetPath(args),
+                PageSize = GetPageSize(args)
+            };
+        }
+
+        private static string GetPath(string[] args)
         {
             if (args.Length == 0)
             {
@@ -59,6 +70,26 @@ namespace CsvViewer
             {
                 return args[0];
             }
+        }
+
+        private static int GetPageSize(string[] args)
+        {
+            string pageSizeString;
+            if (args.Length < 2)
+            {
+                Console.WriteLine("Please enter the page size");
+                pageSizeString = Console.ReadLine();
+            }
+            else
+            {
+                pageSizeString = args[1];
+            }
+
+            if (!int.TryParse(pageSizeString, out int pageSize))
+            {
+                throw new ArgumentOutOfRangeException($"'{pageSize}' is not a valid value for the page size");
+            }
+            return pageSize;
         }
 
         private static IList<string> Exit()

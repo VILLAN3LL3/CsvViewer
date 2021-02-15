@@ -2,7 +2,7 @@
   "profiles": {
     "CsvViewer": {
       "commandName": "Project",
-      "commandLineArgs": "addresses.csv"
+      "commandLineArgs": "addresses.csv 5"
     }
   }
 }

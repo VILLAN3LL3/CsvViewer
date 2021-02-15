@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CsvViewer.Model;
 
 namespace CsvViewer
 {
@@ -9,12 +10,12 @@ namespace CsvViewer
         private CsvTableRenderer _renderer;
         private PageCalculator _calculator;
 
-        public CsvInteractor(string path)
+        public CsvInteractor(CommandLineArg arguments)
         {
-            string[] csvContent = _reader.ReadCsv(path);
+            string[] csvContent = _reader.ReadCsv(arguments.Path);
             var csvTable = _creator.CreateCsvTable(csvContent);
             _renderer = new CsvTableRenderer(csvTable);
-            _calculator = new PageCalculator(csvTable.DataLinesCount);
+            _calculator = new PageCalculator(csvTable.DataLinesCount, arguments.PageSize);
         }
 
         public IList<string> GotToFirstPage() => _renderer.RenderCsv(_calculator.CalculateFirstPage());
