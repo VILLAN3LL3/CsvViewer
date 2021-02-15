@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CsvViewer.Model;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -7,7 +8,7 @@ namespace CsvViewer.Tests
     [TestFixture]
     public class CsvInteractorTests
     {
-        private CsvInteractor CreateCsvInteractor() => new CsvInteractor("addresses.csv");
+        private CsvInteractor CreateCsvInteractor() => new CsvInteractor(new CommandLineArg("addresses.csv", 5));
 
         [Test]
         public void Should_Go_To_First_Page()

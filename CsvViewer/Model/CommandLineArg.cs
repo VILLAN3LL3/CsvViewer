@@ -2,7 +2,13 @@
 {
     public class CommandLineArg
     {
-        public string Path { get; set; }
-        public int PageSize { get; set; }
+        public CommandLineArg(string path, int pageSize)
+        {
+            Path = path;
+            PageSize = pageSize;
+        }
+
+        public string Path { get; }
+        public int PageSize { get; }
     }
 }

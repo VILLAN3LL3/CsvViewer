@@ -7,7 +7,7 @@ namespace CsvViewer.Tests
     [TestFixture]
     public class PageCalculatorTests
     {
-        private PageCalculator CreatePageCalculator(int initialOffset) => new PageCalculator(TestData.CsvTable.DataLinesCount, initialOffset);
+        private PageCalculator CreatePageCalculator(int initialOffset) => new PageCalculator(TestData.CsvTable.DataLinesCount, 5, initialOffset);
 
         [Test]
         public void Should_Calculate_First_Page()
@@ -21,6 +21,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(0);
         }
 
         [Test]
@@ -35,6 +36,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(10);
         }
 
         [Test]
@@ -49,6 +51,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(5);
         }
 
         [Test]
@@ -63,6 +66,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(0);
         }
 
         [Test]
@@ -77,6 +81,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(0);
         }
 
         [Test]
@@ -91,6 +96,7 @@ namespace CsvViewer.Tests
 
             // Assert
             result.Should().Equals(expectedPage);
+            pageCalculator.CurrentOffset.Should().Be(10);
         }
     }
 }

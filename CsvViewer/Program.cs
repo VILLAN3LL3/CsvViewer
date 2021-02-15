@@ -50,14 +50,7 @@ namespace CsvViewer
             }
         }
 
-        private static CommandLineArg GetCommandLineArgs(string[] args)
-        {
-            return new CommandLineArg
-            {
-                Path = GetPath(args),
-                PageSize = GetPageSize(args)
-            };
-        }
+        private static CommandLineArg GetCommandLineArgs(string[] args) => new CommandLineArg(GetPath(args), GetPageSize(args));
 
         private static string GetPath(string[] args)
         {
