@@ -4,6 +4,7 @@ The following clean code exercise is processed in this repository: https://ccd-s
 
 The relevant clean code principles are:
 
+* SRP (Single Responsibility Pattern)
 * DRY (Don't Repeat Yourself)
 * IOSP (Integration Operation Segregation Principle)
 
