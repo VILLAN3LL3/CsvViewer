@@ -8,8 +8,6 @@ namespace CsvViewer
     public class CsvTableRenderer
     {
         private readonly CsvTable _csvTable;
-        public const int PAGE_SIZE = 5;
-        private int _offset;
 
         public CsvTableRenderer(CsvTable csvTable)
         {
@@ -20,33 +18,7 @@ namespace CsvViewer
             _csvTable = csvTable;
         }
 
-        public IList<string> RenderFirstPage()
-        {
-            _offset = 0;
-            return RenderCsv();
-        }
-
-        public IList<string> RenderLastPage()
-        {
-            int modulus = _csvTable.DataLinesCount % PAGE_SIZE;
-            int offset = ( _csvTable.DataLinesCount / PAGE_SIZE ) * PAGE_SIZE;
-            _offset = modulus == 0 ? offset - PAGE_SIZE : offset;
-            return RenderCsv();
-        }
-
-        public IList<string> RenderNextPage()
-        {
-            _offset += PAGE_SIZE;
-            return _offset > _csvTable.DataLinesCount ? RenderFirstPage() : RenderCsv();
-        }
-
-        public IList<string> RenderPreviousPage()
-        {
-            _offset -= PAGE_SIZE;
-            return _offset < 0 ? RenderLastPage() : RenderCsv();
-        }
-
-        public IList<string> RenderCsv()
+        public IList<string> RenderCsv(Page page)
         {
             var renderedList = new List<string>
             {
@@ -54,7 +26,7 @@ namespace CsvViewer
                 RenderHeaderLine(_csvTable)
             };
 
-            for (int i = _offset; i < Math.Min(_offset + PAGE_SIZE, _csvTable.DataLinesCount); i++)
+            for (int i = page.StartIndex; i < page.EndIndex; i++)
             {
                 renderedList.Add(RenderEmptyLine(_csvTable));
                 renderedList.Add(RenderDataLine(_csvTable, i));

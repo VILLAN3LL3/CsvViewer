@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CsvViewer.Model;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -10,55 +11,17 @@ namespace CsvViewer.Tests
         private CsvTableRenderer CreateCsvRenderer() => new CsvTableRenderer(TestData.CsvTable);
 
         [Test]
-        public void Should_Render_First_Page()
+        public void Should_Render_Second_Page()
         {
             // Arrange
             CsvTableRenderer csvRenderer = CreateCsvRenderer();
+            var pageToRender = new Page(5, 10);
 
             // Act
-            IList<string> result = csvRenderer.RenderFirstPage();
-
-            // Assert
-            result.Should().Equal(TestData.RenderedFirstPage);
-        }
-
-        [Test]
-        public void Should_Render_Last_Page()
-        {
-            // Arrange
-            CsvTableRenderer csvRenderer = CreateCsvRenderer();
-
-            // Act
-            IList<string> result = csvRenderer.RenderLastPage();
-
-            // Assert
-            result.Should().Equal(TestData.RenderedLastPage);
-        }
-
-        [Test]
-        public void Should_Render_Next_Page()
-        {
-            // Arrange
-            CsvTableRenderer csvRenderer = CreateCsvRenderer();
-
-            // Act
-            IList<string> result = csvRenderer.RenderNextPage();
+            IList<string> result = csvRenderer.RenderCsv(pageToRender);
 
             // Assert
             result.Should().Equal(TestData.RenderedSecondPage);
-        }
-
-        [Test]
-        public void Should_Render_Previous_Page()
-        {
-            // Arrange
-            CsvTableRenderer csvRenderer = CreateCsvRenderer();
-
-            // Act
-            IList<string> result = csvRenderer.RenderPreviousPage();
-
-            // Assert
-            result.Should().Equal(TestData.RenderedLastPage);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace CsvViewer
                     { ConsoleKey.N, () => interactor.GoToNextPage() },
                     { ConsoleKey.P, () => interactor.GoToPreviousPage() },
                     { ConsoleKey.L, () => interactor.GoToLastPage() },
-                    { ConsoleKey.X, () => interactor.Exit() }
+                    { ConsoleKey.X, () => Exit() }
                 };
 
                 foreach (string line in interactor.GotToFirstPage())
@@ -59,6 +59,12 @@ namespace CsvViewer
             {
                 return args[0];
             }
+        }
+
+        private static IList<string> Exit()
+        {
+            Environment.Exit(0);
+            return null;
         }
     }
 }
