@@ -18,6 +18,8 @@ namespace CsvViewer.Tests
                 "Kuno;78;Basel",
                 "Christian;5;Fulda",
                 "Sarah;34;Cuxhaven",
+                "Meredith;48;London",
+                "Erhard;77;Freising"
             };
 
         public static CsvTable CsvTable
@@ -27,15 +29,15 @@ namespace CsvViewer.Tests
                 var table = new CsvTable();
                 table.Columns = new List<CsvColumn>()
                 {
-                    new CsvColumn { Header = "Name", DataLines = new List<string> { "Paul", "Ina", "Peter", "Britta", "Hilde", "Charlotte", "Hans-Jürgen", "Kuno", "Christian", "Sarah" }},
-                    new CsvColumn { Header = "Alter", DataLines = new List<string> { "27", "80", "18", "26", "90", "46", "68", "78", "5", "34"}},
-                    new CsvColumn { Header = "Ort", DataLines = new List<string> { "München", "Osnabrück", "Freiburg", "Rheinau", "Neunkirchen", "Berlin", "Essen", "Basel", "Fulda", "Cuxhaven"}}
+                    new CsvColumn { Header = "Name", DataLines = new List<string> { "Paul", "Ina", "Peter", "Britta", "Hilde", "Charlotte", "Hans-Jürgen", "Kuno", "Christian", "Sarah", "Meredith", "Erhard" }},
+                    new CsvColumn { Header = "Alter", DataLines = new List<string> { "27", "80", "18", "26", "90", "46", "68", "78", "5", "34", "48", "77" }},
+                    new CsvColumn { Header = "Ort", DataLines = new List<string> { "München", "Osnabrück", "Freiburg", "Rheinau", "Neunkirchen", "Berlin", "Essen", "Basel", "Fulda", "Cuxhaven", "London", "Freising" }}
                 };
                 return table;
             }
         }
 
-        public static IList<string> RenderedCsvData => new List<string>
+        public static IList<string> RenderedFirstPage => new List<string>
         {
             "+-----------+-----+-----------+",
             "|Name       |Alter|Ort        |",
@@ -49,6 +51,24 @@ namespace CsvViewer.Tests
             "|Britta     |26   |Rheinau    |",
             "+-----------+-----+-----------+",
             "|Hilde      |90   |Neunkirchen|",
+            "+-----------+-----+-----------+",
+        };
+
+        public static IList<string> RenderedLastPage => new List<string>
+        {
+            "+-----------+-----+-----------+",
+            "|Name       |Alter|Ort        |",
+            "+-----------+-----+-----------+",
+            "|Meredith   |48   |London     |",
+            "+-----------+-----+-----------+",
+            "|Erhard     |77   |Freising   |",
+            "+-----------+-----+-----------+",
+        };
+
+        public static IList<string> RenderedSecondPage => new List<string>
+        {
+            "+-----------+-----+-----------+",
+            "|Name       |Alter|Ort        |",
             "+-----------+-----+-----------+",
             "|Charlotte  |46   |Berlin     |",
             "+-----------+-----+-----------+",
