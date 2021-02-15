@@ -27,12 +27,18 @@ namespace CsvViewer.Tests
             get
             {
                 var table = new CsvTable();
-                table.Columns = new List<CsvColumn>()
-                {
-                    new CsvColumn { Header = "Name", DataLines = new List<string> { "Paul", "Ina", "Peter", "Britta", "Hilde", "Charlotte", "Hans-Jürgen", "Kuno", "Christian", "Sarah", "Meredith", "Erhard" }},
-                    new CsvColumn { Header = "Alter", DataLines = new List<string> { "27", "80", "18", "26", "90", "46", "68", "78", "5", "34", "48", "77" }},
-                    new CsvColumn { Header = "Ort", DataLines = new List<string> { "München", "Osnabrück", "Freiburg", "Rheinau", "Neunkirchen", "Berlin", "Essen", "Basel", "Fulda", "Cuxhaven", "London", "Freising" }}
-                };
+                var nameColumn = new CsvColumn { Header = "Name" };
+                new List<string> { "Paul", "Ina", "Peter", "Britta", "Hilde", "Charlotte", "Hans-Jürgen", "Kuno", "Christian", "Sarah", "Meredith", "Erhard" }.ForEach(name => nameColumn.DataLines.Add(name));
+                table.Columns.Add(nameColumn);
+
+                var ageColumn = new CsvColumn { Header = "Alter" };
+                new List<string> { "27", "80", "18", "26", "90", "46", "68", "78", "5", "34", "48", "77" }.ForEach(age => ageColumn.DataLines.Add(age));
+                table.Columns.Add(ageColumn);
+
+                var townColumn = new CsvColumn { Header = "Ort" };
+                new List<string> { "München", "Osnabrück", "Freiburg", "Rheinau", "Neunkirchen", "Berlin", "Essen", "Basel", "Fulda", "Cuxhaven", "London", "Freising" }.ForEach(town => townColumn.DataLines.Add(town));
+                table.Columns.Add(townColumn);
+
                 return table;
             }
         }
