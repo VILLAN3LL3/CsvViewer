@@ -37,13 +37,13 @@ namespace CsvViewer
         public IList<string> RenderNextPage()
         {
             _offset += PAGE_SIZE;
-            return RenderCsv();
+            return _offset > _csvTable.DataLinesCount ? RenderFirstPage() : RenderCsv();
         }
 
         public IList<string> RenderPreviousPage()
         {
-            _offset = Math.Max(0, _offset - PAGE_SIZE);
-            return RenderCsv();
+            _offset -= PAGE_SIZE;
+            return _offset < 0 ? RenderLastPage() : RenderCsv();
         }
 
         public IList<string> RenderCsv()
