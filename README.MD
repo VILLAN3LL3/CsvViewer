@@ -1,6 +1,6 @@
 # CSV VIEWER
 
-The following clean code exercise is processed in this repository: https://ccd-school.de/coding-dojo/agility-katas/viewing-csv-files-i/
+[Exercise](https://ccd-school.de/coding-dojo/agility-katas/viewing-csv-files-i/) from the clean code training with [Stefan Lieser](https://lieser-online.de/)
 
 The relevant clean code principles are:
 
