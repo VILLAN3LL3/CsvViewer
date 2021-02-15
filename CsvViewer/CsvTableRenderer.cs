@@ -36,45 +36,24 @@ namespace CsvViewer
             return renderedList;
         }
 
-        private string RenderDataLine(CsvTable csvTable, int i)
+        private string RenderDataLine(CsvTable csvTable, int i) => RenderLine(csvTable, col => col.DataLines[i].PadRight(col.Width), '|');
+
+        private static string RenderHeaderLine(CsvTable csvTable) => RenderLine(csvTable, col => col.Header.PadRight(col.Width), '|');
+
+        private static string RenderEmptyLine(CsvTable csvTable) => RenderLine(csvTable, col => new string('-', col.Width), '+');
+
+        private static string RenderLine(CsvTable csvTable, Func<CsvColumn, string> valueGenerator, char separator)
         {
-            var dataLineBuilder = new StringBuilder();
-            dataLineBuilder.Append('|');
+            var lineBuilder = new StringBuilder();
+            lineBuilder.Append(separator);
 
             foreach (CsvColumn column in csvTable.Columns)
             {
-                dataLineBuilder.Append(column.DataLines[i].PadRight(column.Width));
-                dataLineBuilder.Append('|');
+                lineBuilder.Append(valueGenerator.Invoke(column));
+                lineBuilder.Append(separator);
             }
 
-            return dataLineBuilder.ToString();
-        }
-
-        private static string RenderHeaderLine(CsvTable csvTable)
-        {
-            var headerLineBuilder = new StringBuilder();
-            headerLineBuilder.Append('|');
-
-            foreach (CsvColumn column in csvTable.Columns)
-            {
-                headerLineBuilder.Append(column.Header.PadRight(column.Width));
-                headerLineBuilder.Append('|');
-            }
-
-            return headerLineBuilder.ToString();
-        }
-
-        private static string RenderEmptyLine(CsvTable csvTable)
-        {
-            var emptyLineBuilder = new StringBuilder();
-            emptyLineBuilder.Append('+');
-
-            foreach (CsvColumn column in csvTable.Columns)
-            {
-                emptyLineBuilder.Append(new string('-', column.Width));
-                emptyLineBuilder.Append('+');
-            }
-            return emptyLineBuilder.ToString();
+            return lineBuilder.ToString();
         }
     }
 }
