@@ -14,7 +14,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(0);
-            var expectedPage = new Page(0, 5);
+            var expectedPage = new Page(0, 5, 1, 3);
 
             // Act
             Page result = pageCalculator.CalculateFirstPage();
@@ -29,7 +29,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(0);
-            var expectedPage = new Page(10, 12);
+            var expectedPage = new Page(10, 12, 3, 3);
 
             // Act
             Page result = pageCalculator.CalculateLastPage();
@@ -44,7 +44,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(0);
-            var expectedPage = new Page(5, 10);
+            var expectedPage = new Page(5, 10, 2, 3);
 
             // Act
             Page result = pageCalculator.CalculateNextPage();
@@ -59,7 +59,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(10);
-            var expectedPage = new Page(0, 5);
+            var expectedPage = new Page(0, 5, 1, 3);
 
             // Act
             Page result = pageCalculator.CalculateNextPage();
@@ -74,7 +74,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(5);
-            var expectedPage = new Page(0, 5);
+            var expectedPage = new Page(0, 5, 1, 3);
 
             // Act
             Page result = pageCalculator.CalculatePreviousPage();
@@ -89,7 +89,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             PageCalculator pageCalculator = CreatePageCalculator(0);
-            var expectedPage = new Page(10, 12);
+            var expectedPage = new Page(10, 12, 3, 3);
 
             // Act
             Page result = pageCalculator.CalculatePreviousPage();

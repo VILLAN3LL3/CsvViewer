@@ -33,6 +33,7 @@ namespace CsvViewer
             }
 
             renderedList.Add(RenderEmptyLine(_csvTable));
+            renderedList.Add($"Page {page.PageNumber} of {page.TotalPagesCount}");
             return renderedList;
         }
 

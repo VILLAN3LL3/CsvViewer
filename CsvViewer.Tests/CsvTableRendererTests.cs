@@ -15,7 +15,7 @@ namespace CsvViewer.Tests
         {
             // Arrange
             CsvTableRenderer csvRenderer = CreateCsvRenderer();
-            var pageToRender = new Page(5, 10);
+            var pageToRender = new Page(5, 10, 2, 3);
 
             // Act
             IList<string> result = csvRenderer.RenderCsv(pageToRender);

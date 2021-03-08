@@ -8,6 +8,7 @@ namespace CsvViewer
         private readonly int _linesCount;
         private int _offset;
         private readonly int _pageSize;
+        private int _totalPageCount => (int)Math.Ceiling(_linesCount / (decimal)_pageSize);
 
         public PageCalculator(int linesCount, int pageSize, int initialOffset = 0)
         {
@@ -46,7 +47,9 @@ namespace CsvViewer
 
         private Page CreatePageFromCurrentOffset()
         {
-            return new Page(_offset, Math.Min(_offset + _pageSize, _linesCount));
+            int endIndex = Math.Min(_offset + _pageSize, _linesCount);
+            int pageNumber = (int)Math.Ceiling(endIndex / (decimal)_pageSize);
+            return new Page(_offset, endIndex, pageNumber, _totalPageCount);
         }
     }
 }

@@ -63,6 +63,7 @@ namespace CsvViewer.Tests
             "+---+-----------+-----+-----------+",
             "|5. |Hilde      |90   |Neunkirchen|",
             "+---+-----------+-----+-----------+",
+            "Page 1 of 3"
         };
 
         public static IList<string> RenderedLastPage => new List<string>
@@ -74,6 +75,7 @@ namespace CsvViewer.Tests
             "+---+-----------+-----+-----------+",
             "|12.|Erhard     |77   |Freising   |",
             "+---+-----------+-----+-----------+",
+            "Page 3 of 3"
         };
 
         public static IList<string> RenderedSecondPage => new List<string>
@@ -91,6 +93,7 @@ namespace CsvViewer.Tests
             "+---+-----------+-----+-----------+",
             "|10.|Sarah      |34   |Cuxhaven   |",
             "+---+-----------+-----+-----------+",
+            "Page 2 of 3"
         };
     }
 }
