@@ -23,6 +23,7 @@ namespace CsvViewer
                     { ConsoleKey.N, () => interactor.GoToNextPage() },
                     { ConsoleKey.P, () => interactor.GoToPreviousPage() },
                     { ConsoleKey.L, () => interactor.GoToLastPage() },
+                    { ConsoleKey.J, () => interactor.JumpToPage(ReadPageNumber(console)) },
                     { ConsoleKey.X, () => Exit() }
                 };
 
@@ -33,7 +34,7 @@ namespace CsvViewer
 
                 while (true)
                 {
-                    console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
+                    console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, J(ump to page, eX(it");
                     ConsoleKey consoleKey = console.ReadKey().Key;
 
                     if (!commands.TryGetValue(consoleKey, out Func<IList<string>> command))
@@ -51,6 +52,17 @@ namespace CsvViewer
             {
                 console.WriteLine($"An error occured: {ex.Message}");
             }
+        }
+
+        private static int ReadPageNumber(IConsole console)
+        {
+            console.WriteLine("Enter the page number you want to jump to:");
+            if (!int.TryParse(console.ReadLine(), out int pageNumber))
+            {
+                console.WriteLine("The page number you entered is not valid.");
+                return ReadPageNumber(console);
+            }
+            return pageNumber;
         }
 
         private static IList<string> Exit()

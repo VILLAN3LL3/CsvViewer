@@ -61,5 +61,18 @@ namespace CsvViewer.Tests
             // Assert
             result.Should().BeEquivalentTo(TestData.RenderedLastPage);
         }
+
+        [Test]
+        public void Should_Go_To_Specific_Page()
+        {
+            // Arrange
+            CsvInteractor csvInteractor = CreateCsvInteractor();
+
+            // Act
+            IList<string> result = csvInteractor.JumpToPage(2);
+
+            // Assert
+            result.Should().BeEquivalentTo(TestData.RenderedSecondPage);
+        }
     }
 }

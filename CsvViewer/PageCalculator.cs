@@ -45,6 +45,20 @@ namespace CsvViewer
             return _offset < 0 ? CalculateLastPage() : CreatePageFromCurrentOffset();
         }
 
+        public Page CalculatePage(int pageNumber)
+        {
+            _offset = ( _pageSize * pageNumber ) - _pageSize;
+            if (_offset < 0)
+            {
+                return CalculateFirstPage();
+            }
+            if (_offset > _linesCount - 1)
+            {
+                return CalculateLastPage();
+            }
+            return CreatePageFromCurrentOffset();
+        }
+
         private Page CreatePageFromCurrentOffset()
         {
             int endIndex = Math.Min(_offset + _pageSize, _linesCount);
