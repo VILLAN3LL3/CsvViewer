@@ -20,7 +20,7 @@ namespace CsvViewer.Tests
             IList<string> result = csvInteractor.GotToFirstPage();
 
             // Assert
-            result.Should().Equals(TestData.RenderedFirstPage);
+            result.Should().BeEquivalentTo(TestData.RenderedFirstPage);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace CsvViewer.Tests
             IList<string> result = csvInteractor.GoToLastPage();
 
             // Assert
-            result.Should().Equals(TestData.RenderedLastPage);
+            result.Should().BeEquivalentTo(TestData.RenderedLastPage);
         }
 
         [Test]
@@ -43,10 +43,10 @@ namespace CsvViewer.Tests
             CsvInteractor csvInteractor = CreateCsvInteractor();
 
             // Act
-            IList<string> result = csvInteractor.GoToLastPage();
+            IList<string> result = csvInteractor.GoToNextPage();
 
             // Assert
-            result.Should().Equals(TestData.RenderedSecondPage);
+            result.Should().BeEquivalentTo(TestData.RenderedSecondPage);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace CsvViewer.Tests
             IList<string> result = csvInteractor.GoToPreviousPage();
 
             // Assert
-            result.Should().Equals(TestData.RenderedLastPage);
+            result.Should().BeEquivalentTo(TestData.RenderedLastPage);
         }
     }
 }

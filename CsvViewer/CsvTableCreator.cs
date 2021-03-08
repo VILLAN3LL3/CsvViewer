@@ -38,9 +38,10 @@ namespace CsvViewer
         {
             var lineList = new List<string[]>();
 
-            foreach (string csvLine in csvContent)
+            for (int i = 0; i < csvContent.Length; i++)
             {
-                lineList.Add(csvLine.Split(';'));
+                string increment = i == 0 ? "No." : $"{i}.";
+                lineList.Add(new[] { increment }.Concat(csvContent[i].Split(';')).ToArray());
             }
 
             return lineList;

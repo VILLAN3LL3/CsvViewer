@@ -20,7 +20,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculateFirstPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(0);
         }
 
@@ -35,7 +35,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculateLastPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(10);
         }
 
@@ -50,7 +50,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculateNextPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(5);
         }
 
@@ -65,7 +65,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculateNextPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(0);
         }
 
@@ -80,7 +80,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculatePreviousPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(0);
         }
 
@@ -95,7 +95,7 @@ namespace CsvViewer.Tests
             Page result = pageCalculator.CalculatePreviousPage();
 
             // Assert
-            result.Should().Equals(expectedPage);
+            result.Should().BeEquivalentTo(expectedPage);
             pageCalculator.CurrentOffset.Should().Be(10);
         }
     }
