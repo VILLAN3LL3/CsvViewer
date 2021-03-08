@@ -4,15 +4,18 @@ using CsvViewer.Model;
 
 namespace CsvViewer
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main(string[] args)
         {
-            CommandLineArg arguments = GetCommandLineArgs(args);
-            Console.WriteLine($"I will now display the first page of the csv table on path {arguments.Path} with a maximum page size of {arguments.PageSize}:");
-
+            var console = new ConsoleWrapper();
             try
             {
+                var commandLineArgsHandler = new CommandLineArgsHandler(console);
+                CommandLineArg arguments = commandLineArgsHandler.GetCommandLineArgs(args);
+
+                Console.WriteLine($"I will now display the first page of the csv table on path {arguments.Path} with a maximum page size of {arguments.PageSize}:");
+
                 var interactor = new CsvInteractor(arguments);
 
                 var commands = new Dictionary<ConsoleKey, Func<IList<string>>>()
@@ -25,13 +28,13 @@ namespace CsvViewer
 
                 foreach (string line in interactor.GotToFirstPage())
                 {
-                    Console.WriteLine(line);
+                    console.WriteLine(line);
                 }
 
                 while (true)
                 {
-                    Console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
-                    ConsoleKey consoleKey = Console.ReadKey().Key;
+                    console.WriteLine("N(ext page, P(revious page, F(irst page, L(ast page, eX(it");
+                    ConsoleKey consoleKey = console.ReadKey().Key;
 
                     if (!commands.TryGetValue(consoleKey, out Func<IList<string>> command))
                     {
@@ -40,49 +43,14 @@ namespace CsvViewer
 
                     foreach (string line in command.Invoke())
                     {
-                        Console.WriteLine(line);
+                        console.WriteLine(line);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occured: {ex.Message}");
+                console.WriteLine($"An error occured: {ex.Message}");
             }
-        }
-
-        private static CommandLineArg GetCommandLineArgs(string[] args) => new CommandLineArg(GetPath(args), GetPageSize(args));
-
-        private static string GetPath(string[] args)
-        {
-            if (args.Length == 0)
-            {
-                Console.WriteLine("Please enter the path to the csv file you want to display");
-                return Console.ReadLine();
-            }
-            else
-            {
-                return args[0];
-            }
-        }
-
-        private static int GetPageSize(string[] args)
-        {
-            string pageSizeString;
-            if (args.Length < 2)
-            {
-                Console.WriteLine("Please enter the page size");
-                pageSizeString = Console.ReadLine();
-            }
-            else
-            {
-                pageSizeString = args[1];
-            }
-
-            if (!int.TryParse(pageSizeString, out int pageSize))
-            {
-                throw new ArgumentOutOfRangeException($"'{pageSize}' is not a valid value for the page size");
-            }
-            return pageSize;
         }
 
         private static IList<string> Exit()
